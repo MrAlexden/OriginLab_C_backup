@@ -1,0 +1,94 @@
+// Filename:    Custom.ogs
+// Purpose:     The Custom Routine button on the standard toolbar will use this code, by calling
+//		the [Main] section 
+// Modifications:
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Main Code 
+////////////////////////////////////////////////////////////////////////////////
+[Main]
+	run.LoadOC(Originlab\nlsf_utils.c);
+	run.LoadOC(Originlab\graph_utils.c, 16);
+	Run.LoadOC("H:\YandexDisk\ЭКСПЕРИМЕНТ 2021 NI\Программы Денисов\Обработка OriginLab\AllinOneScript_rework.cpp");
+	
+	int result = run.section(,askfile);
+	if(result != 0)
+		type -b "Ошибка! Возможно выбран файл без данных(с нулевым размером)";
+
+[askfile]
+	fname$="";//empty it so later can test length
+	
+	//E:\YandexDisk\ЭКСПЕРИМЕНТ 2021 NI
+	//D:\Data
+	
+	{dlgfile g:="*.tdms" m:=1 t:="NITDM Import" init:="K:\NI";}
+	int nn=fname.GetLength();
+	if (nn==0)
+		return 0;
+	nn = fname.GetNumTokens(CRLF);//number of files
+	
+	Tree tt;
+	impFileSel xfname:=impNITDM trFiles:=tt;
+	
+	tt.FileSetting.Groups.ChannelGroup0.Channel0 = 0; // (0) ВЧ пр
+	tt.FileSetting.Groups.ChannelGroup0.Channel1 = 0; // (1) ВЧ отр
+	tt.FileSetting.Groups.ChannelGroup0.Channel2 = 0; // (2) ИЦР пр
+	tt.FileSetting.Groups.ChannelGroup0.Channel3 = 0; // (3) ИЦР отр
+	tt.FileSetting.Groups.ChannelGroup0.Channel4 = 0; // (4) СВЧ пр
+	tt.FileSetting.Groups.ChannelGroup0.Channel5 = 0; // (5) СВЧ отр
+	/*
+	tt.FileSetting.Groups.ChannelGroup0.Channel6 = 0; // (6) Пила зонда
+	tt.FileSetting.Groups.ChannelGroup0.Channel7 = 0; // (7) Пила сеточный
+	*/
+	tt.FileSetting.Groups.ChannelGroup0.Channel8 = 0; // (8) Пьезоклапан
+	/*
+	tt.FileSetting.Groups.ChannelGroup0.Channel9 = 0; // (9) Пила магнитный
+	*/
+	tt.FileSetting.Groups.ChannelGroup0.Channel10 = 0;// (10) ГОПФ
+	tt.FileSetting.Groups.ChannelGroup0.Channel11 = 0;// (11) ПОПФ
+	tt.FileSetting.Groups.ChannelGroup0.Channel12 = 0;// (12) Интерферометр
+	/*
+	tt.FileSetting.Groups.ChannelGroup0.Channel13 = 0;// (13) Ток зонда
+	tt.FileSetting.Groups.ChannelGroup0.Channel14 = 0;// (14) Ток сеточный торец
+	*/
+	tt.FileSetting.Groups.ChannelGroup0.Channel15 = 0;// (15) Магнитное поле
+	/*
+	tt.FileSetting.Groups.ChannelGroup0.Channel16 = 0;// (16) Пила цилиндр
+	tt.FileSetting.Groups.ChannelGroup0.Channel17 = 0;// (17) Ток зонда 2
+	tt.FileSetting.Groups.ChannelGroup0.Channel18 = 0;// (18) Ток сеточный штанга
+	tt.FileSetting.Groups.ChannelGroup0.Channel19 = 0;// (19) Ток магнитный
+	tt.FileSetting.Groups.ChannelGroup0.Channel20 = 0;// (20) Ток цилиндрический
+	*/
+	tt.FileSetting.Groups.ChannelGroup0.Channel21 = 0;// (21) ФЭУ
+	tt.FileSetting.Groups.ChannelGroup0.Channel22 = 0;// (22) ФЭУ2
+	tt.FileSetting.Groups.ChannelGroup0.Channel23 = 0;// (23) Pf1
+	tt.FileSetting.Groups.ChannelGroup0.Channel24 = 0;// (24) Pf2
+	tt.FileSetting.Groups.ChannelGroup0.Channel25 = 0;// (25) Pf3
+	tt.FileSetting.Groups.ChannelGroup0.Channel26 = 0;// (26) Pf4
+	tt.FileSetting.Groups.ChannelGroup0.Channel27 = 0;// (27) Pf5
+	tt.FileSetting.Groups.ChannelGroup0.Channel28 = 0;// (28) Pf6
+	
+	for(int ifile = 1; ifile <= nn; ifile++)
+	{
+		string filepath$;
+		// Get next file name
+		filepath$=fname.gettoken(ifile,LF)$;
+		
+		newbook;
+		
+		// Import with the modified file structure
+		impNITDM fname:=filepath$ trFiles:=tt;
+		
+		// fill missing data with my script
+		create_cilin_graph_ogs();
+		
+		// plotting graph
+		string bkname$ = page.longname$;
+		plotxy iy:=((6,10),(3,9)) plot:=200;
+		
+		// setting grap's name
+		page.longname$ = bkname$;
+	}
+	
+	return -256;

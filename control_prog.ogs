@@ -1,0 +1,64 @@
+[Main]
+//uncomment following line to define functions using outside of this scope
+//@global=1;
+
+	string str = "F:\YandexDisk\ЭКСПЕРИМЕНТ 2021 NI\Программы Денисов\Обработка OriginLab\AllInOneProject\";
+	string path;
+
+	run.LoadOC(Originlab\nlsf_utils.c, 9);
+	run.LoadOC(Originlab\graph_utils.c, 9);
+	
+	path$ = str$ + "AllinOneScript_rework.h";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "AllinOneScript_rework.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "SubFuncs.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "MathFuncs.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "Setka_Graph.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "Cilin_Graph.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "SubFuncsForGraph.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "Swap_Graph.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "Zond_Graph.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "Interf_process.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "Dialogs.cpp";
+	run.LoadOC(path$, 9);
+	path$ = str$ + "DoubleProbe_Graph.cpp";
+	run.LoadOC(path$, 9);
+	
+	run.LoadOC();
+	
+	switch (%1)
+	{
+	case 1:
+		zond();
+		break;
+	case 2:
+		graph();
+		break;
+	case 3:
+		setoch();
+		break;
+	case 4:
+		cilinder();
+		break;	
+	case 5:
+		previous_graph();
+		break;
+	case 6:
+		next_graph();
+		break;
+	case 7:	
+		interf_transform();
+		break;
+	case 8:
+		double_probe();
+		break;
+	}

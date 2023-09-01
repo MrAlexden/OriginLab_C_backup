@@ -1,0 +1,135 @@
+﻿
+
+[General Information]
+Function Name = Stepennaya_BAX
+Brief Description = 123
+Function Source = N/A
+Number Of Parameters = 4
+Function Type = User-Defined
+Function Form = Expression
+Path = 
+Number Of Independent Variables = 1
+Number Of Dependent Variables = 1
+Category = Origin Basic Functions
+Function Model = Explicit
+FunctionPrev = NewFunction1
+Analytical Derivatives for User-Defined = 0
+
+
+[Fitting Parameters]
+Names = A,B,C,D
+Initial Values = 0(V),0(V),0(V),0(V)
+Meanings = A,B,C,D
+Lower Bounds = --(I, Off),--(I, Off),--(I, Off),--(I, Off)
+Upper Bounds = --(I, Off),--(I, Off),--(I, Off),--(I, Off)
+Naming Method = User-Defined
+Number Of Significant Digits = 0,0,0,0
+Unit = ,,,
+Format = --,--,--,--
+CustomDisplay = --,--,--,--
+
+
+[Independent Variables]
+x = 
+
+
+[Dependent Variables]
+y = 
+
+
+[Formula]
+A+B*x+C*exp(x/D)
+
+
+[Constraints]
+
+
+[Initializations]
+
+
+[After Fitting]
+
+
+[Constants]
+
+
+[Controls]
+General Linear Constraints = 0
+Initialization Scripts = 0
+Scripts After Fitting = 0
+Number Of Duplicates = N/A
+Duplicate Offset = N/A
+Duplicate Unit = N/A
+Generate Curves After Fitting = 1
+Curve Point Spacing = Uniform on X-Axis Scale
+Generate Peaks After Fitting = 1
+Generate Peaks During Fitting = 1
+Generate Peaks with Baseline = 1
+Paste Parameters to Plot After Fitting = 1
+Paste Parameters to Notes Window After Fitting = 1
+Generate Residuals After Fitting = 0
+Keep Parameters = 0
+Compile On Param Change Script = 1
+Enable Parameters Initialization = 1
+Treat All Numbers As Double = 1
+Use Initial Formula = 0
+AllowInitializingFixedParameters = 0
+
+
+[Compile Function]
+Compile = 0
+Compile Parameters Initialization = 1
+OnParamChangeScriptsEnabled = 0
+
+
+[Parameters Initialization]
+
+//A=-0.3;B=0.008;C=0.017;D=3;
+
+
+[Origin C Function Header]
+
+
+[Origin C Parameter Initialization Header]
+#pragma numlittype(push, TRUE)
+#include <origin.h>
+
+// Add your special include files here.
+// For example, if you want to use functions from the NAG library, 
+// add the header file for the NAG functions here.
+
+// Add code here for other Origin C functions that you want to define in this file,
+// and access in your parameter initialization.
+
+// You can access C functions defined in other files, if those files are loaded and compiled 
+// in your workspace, and the functions have been prototyped in a header file that you have 
+// included above. 
+	
+// You can access NLSF object methods and properties directly in your function code.
+// You should follow C-language syntax in defining your function. 
+// For instance, if your parameter name is P1, you cannot use p1 in your function code. 
+// When using fractions, remember that integer division such as 1/2 is equal to 0, and not 0.5
+// Use 0.5 or 1/2.0 to get the correct value.
+
+// For more information and examples, please refer to the "User-Defined Fitting Function" 
+// section of the Origin Help file.
+
+
+[Derived Parameter Settings]
+Unit = 
+Names = 
+Meanings = 
+
+
+[References]
+
+
+[QuickCheck]
+x=1
+A=-0,3
+B=0,008
+C=0,017
+D=3
+
+
+[LabTalk Functions Definition and Initializations]
